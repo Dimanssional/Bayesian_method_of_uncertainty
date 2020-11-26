@@ -15,11 +15,11 @@ class BayesModel:
     def compute_prior(self):
         for i in range(len(self.data["OD"])):
             if self.data["OD"].iloc[i] > 0:
-                P = (self.data["P(Ei)"].iloc[i] + ((1 - self.data["P(Ei)"].iloc[i]) / self.data["Max"].iloc[i]) * self.data["OD"].iloc[i])
-                self.prior_probs.append(P)
+                self.prior_probs.append(self.data["P(Ei)"].iloc[i] + ((1 - self.data["P(Ei)"].iloc[i]) / self.data["Max"].iloc[i])
+                                        * self.data["OD"].iloc[i])
             else:
-                P = (self.data["P(Ei)"].iloc[i] + (self.data["P(Ei)"].iloc[i] / np.abs(self.data["Min"].iloc[i])) * self.data["OD"].iloc[i])
-                self.prior_probs.append(P)
+                self.prior_probs.append(self.data["P(Ei)"].iloc[i] + (self.data["P(Ei)"].iloc[i] / np.abs(self.data["Min"].iloc[i]))
+                                        * self.data["OD"].iloc[i])
 
         return self.prior_probs
 
@@ -31,13 +31,11 @@ class BayesModel:
         self.data = self.add_to_dataframe("P(E|E`)", self.prior_probs)
         for i in range(len(self.data["OD"])):
             if self.data["OD"].iloc[i] > 0:
-                P = self.data["P(H)"].iloc[i] + ((self.data["P(H|Ei)"].iloc[i] - self.data["P(H)"].iloc[i])/(1 - self.data["P(Ei)"].iloc[i]))\
-                        *(self.data["P(E|E`)"].iloc[i] - self.data["P(Ei)"].iloc[i])
-                self.posterior_probs.append(P)
+                self.posterior_probs.append(self.data["P(H)"].iloc[i] + ((self.data["P(H|Ei)"].iloc[i] - self.data["P(H)"].iloc[i])
+                        / (1 - self.data["P(Ei)"].iloc[i])) * (self.data["P(E|E`)"].iloc[i] - self.data["P(Ei)"].iloc[i]))
             else:
-                P = self.data["P(H)"].iloc[i] + ((self.data["P(H)"].iloc[i] - self.data["P(H|~Ei)"].iloc[i]) / (self.data["P(Ei)"].iloc[i])) \
-                    * (self.data["P(E|E`)"].iloc[i] - self.data["P(Ei)"].iloc[i])
-                self.posterior_probs.append(P)
+                self.posterior_probs.append(self.data["P(H)"].iloc[i] + ((self.data["P(H)"].iloc[i] - self.data["P(H|~Ei)"].iloc[i])
+                    / (self.data["P(Ei)"].iloc[i])) * (self.data["P(E|E`)"].iloc[i] - self.data["P(Ei)"].iloc[i]))
 
         self.data = self.add_to_dataframe("P(H|E`)", self.posterior_probs)
         return self.posterior_probs
