@@ -17,6 +17,7 @@ class BayesModel:
 
         self.data = data
 
+    @property
     def get_O(self):
         return self.O
 
