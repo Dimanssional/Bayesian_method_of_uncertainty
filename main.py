@@ -1,7 +1,7 @@
 import pandas as pd
 from Bayes_model import BayesModel
 
-KNB = pd.DataFrame(pd.read_csv("KNB2.csv", delimiter=","))
+KNB = pd.DataFrame(pd.read_csv("Data/KNB2.csv", delimiter=","))
 
 pd.set_option("display.max_rows", None, "display.max_columns", None)
 
