@@ -17,9 +17,8 @@ class BayesModel:
 
         self.data = data
 
-    @property
     def get_O(self):
-        return self.O
+        return np.array(self.O).reshape(-1, 1)
 
     def data_correct(self) -> pd.DataFrame:
         self.data = self.data.rename(index=self.data.iloc[:, 0])
