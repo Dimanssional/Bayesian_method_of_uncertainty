@@ -18,7 +18,7 @@ class BayesModel:
         self.data = data
 
     def get_O(self):
-        return np.array(self.O).reshape(-1, 1)
+        return "%.1f" % self.O.astype(np.float)
 
     def data_correct(self) -> pd.DataFrame:
         self.data = self.data.rename(index=self.data.iloc[:, 0])
