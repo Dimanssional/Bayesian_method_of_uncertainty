@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-class BayesModel:
+class BayesModel(object):
 
     def __init__(self, data):
         self.prior_probs = []
@@ -17,6 +17,9 @@ class BayesModel:
 
         self.data = data
 
+    def __str__(self):
+        return "Computing combinational functions CTR and GLOB"
+
     def get_O(self):
         return "%.1f" % self.O.astype(np.float)
 
@@ -29,9 +32,6 @@ class BayesModel:
         self.data.iloc[:, :4] = self.data.iloc[:, :4].astype("float")
         return self.data
 
-    def __str__(self):
-        return "Compute combinational functions CTR and GLOB"
-
     def compute_prior(self):
         for i in range(len(self.data["OD"])):
             if self.data["OD"].iloc[i] > 0:
@@ -40,7 +40,7 @@ class BayesModel:
             else:
                 self.prior_probs.append(self.data["P(Ei)"].iloc[i] + (self.data["P(Ei)"].iloc[i] / np.abs(self.data["Min"].iloc[i]))
                                         * self.data["OD"].iloc[i])
-
+        self.prior_probs = [round(num, 2) for num in self.prior_probs]
         return self.prior_probs
 
     def __add_to_dataframe(self, title, add):
@@ -57,6 +57,7 @@ class BayesModel:
                 self.posterior_probs.append(self.data["P(H)"].iloc[i] + ((self.data["P(H)"].iloc[i] - self.data["P(H|~Ei)"].iloc[i])
                     / (self.data["P(Ei)"].iloc[i])) * (self.data["P(E|E`)"].iloc[i] - self.data["P(Ei)"].iloc[i]))
 
+        self.posterior_probs = [round(num, 1) for num in self.posterior_probs]
         self.data = self.__add_to_dataframe("P(H|E`)", self.posterior_probs)
         return self.posterior_probs
 
