@@ -93,9 +93,11 @@ class BayesModel(object):
         self.ctr = self.compute_ctr()
 
     def compute_O(self):
+        '''function to calculate apriore chance'''
         return self.data["P(H)"].iloc[1] / (1 - self.data["P(H)"].iloc[1])
 
     def compute_OH(self):
+        '''function to calculate logical sufficiency for all rules'''
         OH = []
         for i in range(len(self.data["OD"])):
             OH.append(self.data["P(H|E`)"].iloc[i] / (1 - self.data["P(H|E`)"].iloc[i]))
@@ -105,6 +107,7 @@ class BayesModel(object):
         return OH
 
     def compute_L(self):
+        '''compute LS'''
         self._O = self.compute_O()
         self.OH = self.compute_OH()
 
@@ -118,6 +121,7 @@ class BayesModel(object):
         return L
 
     def compute_glob(self):
+        '''stock contributions of individual rules with the same conclusion to the a posterior probability of races'''
         self.L = self.compute_L()
         L_all = self.data["L"].prod()
 

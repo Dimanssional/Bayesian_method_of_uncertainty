@@ -22,11 +22,13 @@ class Window(QMainWindow):
         self.InitWindow()
 
     def InitWindow(self):
+        '''Initialization the size and name of the window'''
         self.setWindowTitle(self.title)
         self.setGeometry(self.top, self.left, self.width, self.height)
         self.show()
 
     def paintEvent(self, event):
+        '''Inserting objects into window'''
         painter = QPainter(self)
 
         painter.setBrush(QBrush(QColor(227, 91, 0),  Qt.SolidPattern))
@@ -84,9 +86,11 @@ class Window(QMainWindow):
         self.drawText(event, painter)
 
     def drawText(self, event, painter):
-        painter.setFont(QFont('Arial', 12))
+        '''Inserting text and computing values into window'''
 
-        painter.drawText(QPoint(720, 65), 'P(H): ' + str(self.data.iloc[0, 3]))
+        painter.setFont(QFont('Arial', 11))
+
+        painter.drawText(QPoint(710, 72), 'P(H): ' + str(self.data.iloc[0, 3]))
 
         painter.drawText(QPoint(335, 260), 'P(E_x): ' + str(self.data.iloc[0, 0]))
         painter.drawText(QPoint(710, 260), 'P(E_p): ' + str(self.data.iloc[1, 0]))
@@ -98,15 +102,18 @@ class Window(QMainWindow):
         painter.drawText(QPoint(585, 462), 'P(H|E_p): ' + str(self.data.iloc[1, 1]))
         painter.drawText(QPoint(835, 462), 'P(H|~E_p): ' + str(self.data.iloc[1, 2]))
 
-        painter.drawText(QPoint(1085, 462), 'P(H|E_p): ' + str(self.data.iloc[2, 1]))
-        painter.drawText(QPoint(1335, 462), 'P(H|~E_p): ' + str(self.data.iloc[2, 2]))
+        painter.drawText(QPoint(1085, 462), 'P(H|E_t): ' + str(self.data.iloc[2, 1]))
+        painter.drawText(QPoint(1335, 462), 'P(H|~E_t): ' + str(self.data.iloc[2, 2]))
 
         painter.drawText(QPoint(210, 662), 'P(E|E`x): ' + str(self.data.iloc[0, 7]))
         painter.drawText(QPoint(710, 662), 'P(E|E`p): ' + str(self.data.iloc[1, 7]))
         painter.drawText(QPoint(1215, 662), 'P(E|E`t): ' + str(self.data.iloc[2, 7]))
 
-        painter.drawText(QPoint(210, 765), 'P(H|E`x): ' + str(self.data.iloc[0, 8]))
-        painter.drawText(QPoint(710, 765), 'P(H|E`p): ' + str(self.data.iloc[1, 8]))
-        painter.drawText(QPoint(1215, 765), 'P(H|E`t): ' + str(self.data.iloc[2, 8]))
+        painter.drawText(QPoint(210, 770), 'P(H|E`x): ' + str(self.data.iloc[0, 8]))
+        painter.drawText(QPoint(710, 770), 'P(H|E`p): ' + str(self.data.iloc[1, 8]))
+        painter.drawText(QPoint(1215, 770), 'P(H|E`t): ' + str(self.data.iloc[2, 8]))
 
-        painter.drawText(QPoint(710, 940), 'GLOB:' + str(self.glob))
+        painter.drawText(QPoint(710, 942), 'GLOB: ' + str(self.glob))
+
+
+
