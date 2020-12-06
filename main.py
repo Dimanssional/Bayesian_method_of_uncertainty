@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QApplication
 
 
 if __name__ == '__main__':
-    KNB = pd.DataFrame(pd.read_csv("Data/KNB_1.csv", delimiter=","))
+    KNB = pd.DataFrame(pd.read_csv("Data/KNB2.csv", delimiter=","))
 
     pd.set_option("display.max_rows", None, "display.max_columns", None)
 
@@ -15,10 +15,10 @@ if __name__ == '__main__':
     KNB = BayesianModel.data_correct()
     print(KNB)
 
-    print(BayesianModel.compute_prior())
-    print(BayesianModel.compute_ctr())
+    BayesianModel.compute()
     print(KNB)
-    glob = "%.1f" % BayesianModel.compute_glob()
+
+    glob = BayesianModel.compute_glob()
     print(glob)
     print(BayesianModel.get_O())
     print(KNB)
