@@ -5,7 +5,7 @@ import pandas as pd
 class BayesModel(object):
 
     def __init__(self, data):
-        # list of all prior probabilities
+        # list of all posterior probabilities
         self.posterior_probs = []
         # list of all CTR functions
         self.ctr = []
@@ -60,7 +60,7 @@ class BayesModel(object):
         return self.posterior_probs
 
     def __add_to_dataframe(self, title, add):
-        '''Private function for add data to dataframe
+        ''' Private function for add data to dataframe
         title - title of adding attribute
         add - value of adding attribute
         '''
