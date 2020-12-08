@@ -7,7 +7,7 @@ class Window(QMainWindow):
 
     def __init__(self, data, glob):
         super().__init__()
-        self.title = "CHUJ"
+        self.title = "Knowledge Bayesian System"
 
         self.data = data
         self.glob = glob
