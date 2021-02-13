@@ -1,1 +1,2 @@
-# KNBS_Bayesian_method
+# Expert system with Bayesian method of uncertainty
+
