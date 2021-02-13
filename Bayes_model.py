@@ -83,7 +83,7 @@ class BayesModel(object):
                 self.ctr.append(self.data["P(H)"].iloc[i] + ((self.data["P(H)"].iloc[i] - self.data["P(H|~Ei)"].iloc[i])
                     / (self.data["P(Ei)"].iloc[i])) * (self.data["P(E|E`)"].iloc[i] - self.data["P(Ei)"].iloc[i]))
 
-        self.ctr = [round(num, 1) for num in self.ctr]
+        self.ctr = [round(num, 2) for num in self.ctr]
         self.data = self.__add_to_dataframe("P(H|E`)", self.ctr)
         return self.ctr
 
@@ -129,5 +129,5 @@ class BayesModel(object):
         self.OHE_i = (L_all) * self._O
 
         self.GLOB = self.OHE_i / (1 + self.OHE_i)
-        return "%.2f" % self.GLOB
+        return "%.4f" % self.GLOB
 

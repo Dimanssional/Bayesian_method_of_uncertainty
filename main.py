@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QApplication
 
 
 if __name__ == '__main__':
-    KNB = pd.DataFrame(pd.read_csv("Data/KNB_1.csv", delimiter=","))
+    KNB = pd.DataFrame(pd.read_csv("Data/KNB2.csv", delimiter=";"))
     pd.set_option("display.max_rows", None, "display.max_columns", None)
 
     print(KNB)
